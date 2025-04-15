@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAM-Labz Project Specification Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: #1a5b8e;
+        }
+        
+        .brand-orange {
+            color: #ff6b35;
+        }
+        
+        .bg-brand-blue {
+            background-color: #1a5b8e;
+        }
+        
+        .bg-brand-orange {
+            background-color: #ff6b35;
+        }
+        
+        .text-brand-blue {
+            color: #1a5b8e;
+        }
+        
+        .text-brand-teal {
+            color: #007d8c;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #1a5b8e, #ff6b35);
+            border-radius: 2px;
+            margin: 2rem 0;
+        }
+        
+        .diagram {
+            max-width: 100%;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #1a5b8e;
+            margin-left: 1rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -0.6rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #ff6b35;
+        }
+        
+        .timeline-item:last-child {
+            border-left: none;
+        }
+        
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        .table-of-contents a {
+            color: #1a5b8e;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+            color: #ff6b35;
+        }
+        
+        .logo-container {
+            background: linear-gradient(135deg, #1a5b8e 0%, #007d8c 100%);
+            border-radius: 10px;
+            padding: 20px;
+            display: inline-block;
+        }
+        
+        pre {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        blockquote {
+            border-left: 4px solid #ff6b35;
+            padding-left: 1rem;
+            margin-left: 0;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="mb-12 text-center">
+            <div class="logo-container mb-6">
+                <h1 class="text-4xl font-bold text-white">STEAM-Labz</h1>
+                <p class="text-xl text-gray-200">Project Specification Document</p>
+            </div>
+            <p class="text-gray-600 mt-4">Version 1.0 | April 2025</p>
+        </header>
+        
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Table of Contents</h2>
+            <div class="table-of-contents grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <ol class="list-decimal list-inside space-y-2 ml-2">
+                        <li><a href="#executive-summary">Executive Summary</a></li>
+                        <li><a href="#requirements">Requirements Specification</a></li>
+                        <li><a href="#architecture">System Architecture</a></li>
+                        <li><a href="#user-personas">User Personas & Journey Maps</a></li>
+                        <li><a href="#content-strategy">Content Strategy</a></li>
+                        <li><a href="#design-system">Design System Specifications</a></li>
+                        <li><a href="#technical-stack">Technical Stack</a></li>
+                    </ol>
+                </div>
+                <div>
+                    <ol class="list-decimal list-inside space-y-2 ml-2" start="8">
+                        <li><a href="#integration-points">Integration Points</a></li>
+                        <li><a href="#data-management">Data Management & Privacy</a></li>
+                        <li><a href="#metrics">Metrics for Success</a></li>
+                        <li><a href="#timeline">Implementation Timeline</a></li>
+                        <li><a href="#budget">Budget Considerations</a></li>
+                        <li><a href="#team-roles">Team Roles & Responsibilities</a></li>
+                        <li><a href="#risk-assessment">Risk Assessment</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">1. Executive Summary</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">Project Vision</h3>
+            <p class="mb-4">
+                STEAM-Labz is envisioned as a comprehensive platform for creators, makers, educators, and anyone interested in learning and sharing knowledge in STEAM (Science, Technology, Engineering, Arts, and Mathematics) disciplines. The platform aims to lower barriers to entry, provide access to resources, and foster a community-driven approach to STEAM education.
+            </p>
+            
+            <h3 class="text-xl font-semibold mb-3">Mission Statement</h3>
+            <blockquote class="mb-4">
+                To create an inclusive community platform that democratizes access to STEAM education through open collaboration, knowledge sharing, and innovative resources, empowering the next generation of creators, makers, and educators.
+            </blockquote>
+            
+            <h3 class="text-xl font-semibold mb-3">Key Objectives</h3>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Build a project sharing platform similar to Hackster.io for showcasing STEAM projects</li>
+                <li>Develop online educational courses for various STEAM disciplines</li>
+                <li>Create a video streaming service (Stream-Labz) using Cloudflare Stream</li>
+                <li>Establish a vibrant community forum for user engagement and knowledge sharing</li>
+                <li>Support open source initiatives and right-to-repair movements</li>
+                <li>Create specialized opportunities in drone racing, remote RC car racing, F1/10 autonomous vehicle racing</li>
+                <li>Provide 3D printing resources and support for bringing ideas to life</li>
+                <li>Develop funding sources for initiative sustainability and growth</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mb-3">Founder</h3>
+            <p class="mb-4">
+                The STEAM-Labz initiative was founded by <strong>Travis Bowman</strong>, with a vision to create a platform that supports education, collaboration, and innovation in STEAM disciplines.
+            </p>
+            
+            <h3 class="text-xl font-semibold mb-3">Target Audience</h3>
+            <p class="mb-4">
+                The platform is designed to serve a diverse audience including students, educators, hobbyists, professional makers, researchers, and anyone interested in STEAM education and projects.
+            </p>
+        </section>
+        
+        <!-- Requirements Specification -->
+        <section id="requirements" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">2. Requirements Specification</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">2.1 Functional Requirements</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">User Management</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>User registration and authentication system</li>
+                <li>Profile management with skills, interests, and achievements</li>
+                <li>Role-based access control (admin, moderator, creator, user)</li>
+                <li>Social connections and following system</li>
+                <li>User activity tracking and notification system</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Project Sharing Platform</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Project creation with step-by-step documentation</li>
+                <li>Support for images, videos, code snippets, and schematics</li>
+                <li>Categorization by STEAM discipline, difficulty level, and tags</li>
+                <li>Project search and filtering functionality</li>
+                <li>Social interactions: likes, comments, favorites, shares</li>
+                <li>Project version control and revision history</li>
+                <li>Download options for project files and resources</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Educational Courses</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Course creation tools for instructors</li>
+                <li>Multimedia content support (text, images, videos, quizzes)</li>
+                <li>Progress tracking and completion certificates</li>
+                <li>Course ratings and reviews</li>
+                <li>Bookmarking and note-taking features</li>
+                <li>Course recommendations based on user interests and behavior</li>
+                <li>Support for both free and premium/paid courses</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Stream-Labz Video Platform</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Video upload and streaming using Cloudflare Stream</li>
+                <li>Live streaming capability for workshops and events</li>
+                <li>Video categorization and playlists</li>
+                <li>Interactive features: timestamps, comments, reactions</li>
+                <li>Video analytics for creators</li>
+                <li>Subscription options for channel notifications</li>
+                <li>Embedding options for sharing videos on other platforms</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Community Forum</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Threaded discussions organized by topics and categories</li>
+                <li>Question and answer format with accepted answers</li>
+                <li>Rich text editor with support for code, images, and links</li>
+                <li>Reputation and badge system for active contributors</li>
+                <li>Moderation tools for community self-governance</li>
+                <li>Search functionality for finding relevant discussions</li>
+                <li>Integration with projects, courses, and videos for context</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Funding and Support</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Donation system with multiple payment options</li>
+                <li>Subscription tiers for premium features and content</li>
+                <li>Crowdfunding capabilities for specific initiatives and projects</li>
+                <li>Sponsorship management for corporate partners</li>
+                <li>Transparent financial reporting</li>
+                <li>Reward system for supporters</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Administration</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Comprehensive admin dashboard for platform management</li>
+                <li>Content moderation tools and reporting system</li>
+                <li>User management and access control</li>
+                <li>Analytics and reporting for platform usage</li>
+                <li>System configuration and customization options</li>
+                <li>Backup and restoration capabilities</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mb-3">2.2 Non-Functional Requirements</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Performance</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Page load time under 3 seconds for standard content</li>
+                <li>Support for at least 1,000 concurrent users</li>
+                <li>Smooth video streaming experience with minimal buffering</li>
+                <li>Responsive design for all device types and screen sizes</li>
+                <li>Efficient database queries with response times under 500ms</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Security</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>HTTPS implementation for all connections</li>
+                <li>Secure user authentication with multi-factor options</li>
+                <li>Protection against common vulnerabilities (XSS, CSRF, SQL injection)</li>
+                <li>Regular security audits and penetration testing</li>
+                <li>Secure handling of payment information and personal data</li>
+                <li>Compliance with relevant data protection regulations</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Scalability</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Microservices architecture for independent scaling of components</li>
+                <li>Horizontal scalability for handling increased traffic</li>
+                <li>Content delivery optimization through CDN</li>
+                <li>Database sharding for growing data volumes</li>
+                <li>Auto-scaling capabilities based on demand</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Reliability</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>99.9% uptime for core platform services</li>
+                <li>Fault tolerance with graceful degradation</li>
+                <li>Regular data backups with quick recovery options</li>
+                <li>Comprehensive error handling and logging</li>
+                <li>Redundancy for critical system components</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Accessibility</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>WCAG 2.1 AA compliance for all web content</li>
+                <li>Screen reader compatibility</li>
+                <li>Keyboard navigation support</li>
+                <li>Color contrast ratios meeting accessibility standards</li>
+                <li>Alternative text for images and media</li>
+                <li>Support for text resizing without breaking layouts</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Usability</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Intuitive navigation and information architecture</li>
+                <li>Consistent UI patterns across the platform</li>
+                <li>Clear feedback for user actions</li>
+                <li>Helpful error messages and recovery options</li>
+                <li>Comprehensive documentation and help resources</li>
+                <li>Localization support for multiple languages</li>
+            </ul>
+        </section>
+        
+        <!-- System Architecture -->
+        <section id="architecture" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">3. System Architecture</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">3.1 High-Level Architecture</h3>
+            <p class="mb-4">
+                STEAM-Labz will be built using a microservices architecture to ensure modularity, scalability, and maintainability. The system will consist of the following major components:
+            </p>
+            
+            <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                <pre class="text-sm">
+┌──────────────────────────────────────────────────────────────────┐
+│                         Client Layer                             │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       ┌──────────┐    │
+│  │  Browser │  │   PWA    │  │  Mobile  │  ...  │   API    │    │
+│  │          │  │          │  │   App    │       │  Clients │    │
+│  └──────────┘  └──────────┘  └──────────┘       └──────────┘    │
+└───────────────────────────┬──────────────────────────────────────┘
+                            │
+┌───────────────────────────┼──────────────────────────────────────┐
+│                           ▼                                      │
+│                     Presentation Layer                           │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │                      API Gateway                          │   │
+│  └─────────┬─────────────┬─────────────┬─────────────┬──────┘   │
+│            │             │             │             │          │
+│  ┌─────────┼─────────────┼─────────────┼─────────────┼──────┐   │
+│  │         │             │             │             │      │   │
+│  │     Authentication    CDN        Caching      Rate Limit │   │
+│  │                                                          │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└───────────────────────────┬──────────────────────────────────────┘
+                            │
+┌───────────────────────────┼──────────────────────────────────────┐
+│                           ▼                                      │
+│                      Service Layer                               │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │
+│  │   User   │  │  Project │  │  Course  │  │  Video   │         │
+│  │ Service  │  │ Service  │  │ Service  │  │ Service  │         │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │
+│                                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │
+│  │  Forum   │  │ Payment  │  │  Search  │  │  Admin   │         │
+│  │ Service  │  │ Service  │  │ Service  │  │ Service  │         │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │
+└───────────────────────────┬──────────────────────────────────────┘
+                            │
+┌───────────────────────────┼──────────────────────────────────────┐
+│                           ▼                                      │
+│                       Data Layer                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │
+│  │  MySQL   │  │ MongoDB  │  │  Redis   │  │ File     │         │
+│  │ Database │  │ Database │  │  Cache   │  │ Storage  │         │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │
+│                                                                 │
+│  ┌──────────────────────┐  ┌──────────────────────────┐         │
+│  │  Search Index        │  │  Message Queue            │         │
+│  │  (Elasticsearch)     │  │  (RabbitMQ/Kafka)         │         │
+│  └──────────────────────┘  └──────────────────────────┘         │
+└──────────────────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">3.2 Component Interactions</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Client-Server Communication</h4>
+            <p class="mb-4">
+                All client-server communication will be handled through RESTful APIs and WebSockets for real-time features. The API Gateway will serve as the single entry point for all client requests, handling authentication, rate limiting, and request routing.
+            </p>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Service Communication</h4>
+            <p class="mb-4">
+                Services will communicate with each other through both synchronous (HTTP/gRPC) and asynchronous (message queue) methods, depending on the operation:
+            </p>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Synchronous communication for immediate data needs</li>
+                <li>Asynchronous communication for background processing and event-driven operations</li>
+                <li>Service discovery for dynamic service location</li>
+                <li>Circuit breakers for fault tolerance</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Data Flow</h4>
+            <p class="mb-4">
+                Data will flow through the system as follows:
+            </p>
+            <ol class="list-decimal ml-6 mb-6">
+                <li>Client sends request to API Gateway</li>
+                <li>API Gateway authenticates and authorizes the request</li>
+                <li>Request is routed to the appropriate microservice</li>
+                <li>Microservice processes the request, interacting with databases or other services as needed</li>
+                <li>Response is returned through the API Gateway to the client</li>
+                <li>For real-time updates, WebSockets maintain open connections for immediate data pushing</li>
+            </ol>
+            
+            <h3 class="text-xl font-semibold mb-3">3.3 Infrastructure Architecture</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Deployment Model</h4>
+            <p class="mb-4">
+                STEAM-Labz will be deployed using a hybrid approach:
+            </p>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Self-hosted Ubuntu Server for core services to minimize expenses</li>
+                <li>Cloudflare for CDN, security, and Stream services</li>
+                <li>Containerized microservices with Docker</li>
+                <li>Container orchestration with Kubernetes for service management</li>
+                <li>Ability to run independently of outside resources if funding becomes unavailable</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Networking</h4>
+            <p class="mb-4">
+                The networking infrastructure will include:
+            </p>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Cloudflare as the front line for DNS, CDN, and DDoS protection</li>
+                <li>Load balancing for distributing traffic</li>
+                <li>Virtual private network for secure inter-service communication</li>
+                <li>HTTPS for all external connections</li>
+                <li>Network segmentation for security isolation</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Monitoring and Logging</h4>
+            <p class="mb-4">
+                Comprehensive monitoring and logging will be implemented:
+            </p>
+            <ul class="list-disc ml-6 mb-6">
+                <li>Centralized logging with the ELK stack (Elasticsearch, Logstash, Kibana)</li>
+                <li>Application performance monitoring with Prometheus and Grafana</li>
+                <li>Real-time alerting for system issues</li>
+                <li>User experience monitoring</li>
+                <li>Security event monitoring and analysis</li>
+            </ul>
+        </section>
+        
+        <!-- User Personas and Journey Maps -->
+        <section id="user-personas" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">4. User Personas & Journey Maps</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">4.1 Core User Personas</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Educator Persona -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Educator Emily</h4>
+                    <p class="italic text-gray-600 mb-3">High school science teacher looking for innovative ways to engage students</p>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Demographics:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>35 years old</li>
+                            <li>Master's in Education</li>
+                            <li>10 years teaching experience</li>
+                            <li>Urban school district</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Goals:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Find engaging STEAM projects for classroom</li>
+                            <li>Connect with other educators</li>
+                            <li>Track student progress</li>
+                            <li>Access ready-to-use lesson plans</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Pain Points:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Limited school budget for resources</li>
+                            <li>Time constraints for lesson planning</li>
+                            <li>Difficulty finding age-appropriate projects</li>
+                            <li>Needs alignment with curriculum standards</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Student Persona -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Student Sam</h4>
+                    <p class="italic text-gray-600 mb-3">Tech-savvy high school student interested in engineering and coding</p>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Demographics:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>16 years old</li>
+                            <li>High school junior</li>
+                            <li>Active in robotics club</li>
+                            <li>Plans to study computer science</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Goals:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Learn new skills beyond classroom</li>
+                            <li>Build portfolio for college applications</li>
+                            <li>Connect with mentors and peers</li>
+                            <li>Showcase projects and get feedback</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Pain Points:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Limited access to expensive equipment</li>
+                            <li>Struggles to find beginner-friendly resources</li>
+                            <li>Needs guidance on complex concepts</li>
+                            <li>Balancing school and personal projects</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Maker Persona -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Maker Mike</h4>
+                    <p class="italic text-gray-600 mb-3">Hobbyist engineer who enjoys building DIY electronics and IoT devices</p>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Demographics:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>42 years old</li>
+                            <li>Software developer by profession</li>
+                            <li>20+ years of programming experience</li>
+                            <li>Active in local makerspace</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Goals:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Share knowledge and expertise</li>
+                            <li>Find inspiration for new projects</li>
+                            <li>Connect with like-minded creators</li>
+                            <li>Contribute to open-source initiatives</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Pain Points:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Finding well-documented advanced projects</li>
+                            <li>Accessing specialty components</li>
+                            <li>Limited time for complex builds</li>
+                            <li>Needs platform for showcasing work</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Parent Persona -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Parent Patricia</h4>
+                    <p class="italic text-gray-600 mb-3">Mother of two looking for educational activities to do with her children</p>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Demographics:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>38 years old</li>
+                            <li>Children ages 8 and 11</li>
+                            <li>Works part-time</li>
+                            <li>Limited technical background</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Goals:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Find age-appropriate STEAM activities</li>
+                            <li>Support children's education at home</li>
+                            <li>Create family learning experiences</li>
+                            <li>Find affordable educational resources</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-semibold">Pain Points:</h5>
+                        <ul class="list-disc ml-6">
+                            <li>Intimidated by technical jargon</li>
+                            <li>Limited budget for educational materials</li>
+                            <li>Needs projects with clear instructions</li>
+                            <li>Balancing educational value with fun</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">4.2 User Journey Maps</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Educator Journey: Finding and Implementing a Classroom Project</h4>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Stage</th>
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Actions</th>
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Thoughts/Feelings</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Touchpoints</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Discovery</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Hears about STEAM-Labz from colleague</li>
+                                    <li>Visits website to explore</li>
+                                    <li>Browses project categories</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-yellow-600">"I hope I can find projects that fit my curriculum needs and budget."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Word of mouth</li>
+                                    <li>Website homepage</li>
+                                    <li>Project gallery</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Registration</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Creates educator account</li>
+                                    <li>Completes profile with teaching information</li>
+                                    <li>Sets preferences for content</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-blue-600">"I appreciate the educator-specific options. This might be valuable for my classroom."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Registration form</li>
+                                    <li>Profile setup</li>
+                                    <li>Welcome email</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Search</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Uses filtering tools to find age-appropriate projects</li>
+                                    <li>Searches for curriculum-aligned content</li>
+                                    <li>Reviews project requirements and materials</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-green-600">"These filters are helpful. I like that I can see the cost and time estimates upfront."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Search functionality</li>
+                                    <li>Filtering system</li>
+                                    <li>Project details page</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Evaluation</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Reviews project documentation</li>
+                                    <li>Watches related video tutorials</li>
+                                    <li>Reads reviews from other educators</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-purple-600">"This project looks promising, but I want to make sure it works in a classroom setting."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Project documentation</li>
+                                    <li>Stream-Labz videos</li>
+                                    <li>User reviews</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Preparation</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Downloads lesson plan and materials list</li>
+                                    <li>Asks questions in community forum</li>
+                                    <li>Creates classroom adaptation notes</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-orange-600">"I'm getting excited to try this with my students. The community feedback is reassuring."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Downloadable resources</li>
+                                    <li>Community forum</li>
+                                    <li>Note-taking features</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Implementation</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Conducts project with students</li>
+                                    <li>References tutorial videos as needed</li>
+                                    <li>Takes photos of student work</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-red-600">"The students are really engaged! The step-by-step instructions are clear even for beginners."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Printed materials</li>
+                                    <li>Mobile access to videos</li>
+                                    <li>Photo capture tools</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-r border-gray-200 font-medium">Feedback</td>
+                            <td class="py-2 px-4 border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Shares photos of completed project</li>
+                                    <li>Writes review with classroom tips</li>
+                                    <li>Discusses adaptations in forum</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-r border-gray-200">
+                                <p class="text-green-600">"I'm happy to contribute back to the community. This platform has been a great resource for my teaching."</p>
+                            </td>
+                            <td class="py-2 px-4">
+                                <ul class="list-disc ml-4">
+                                    <li>Project submission form</li>
+                                    <li>Review system</li>
+                                    <li>Community forum</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Student Journey: Learning Through Courses and Creating a Project</h4>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Stage</th>
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Actions</th>
+                            <th class="py-2 px-4 border-b border-r border-gray-200">Thoughts/Feelings</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Touchpoints</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Discovery</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Discovers STEAM-Labz through YouTube</li>
+                                    <li>Explores website out of curiosity</li>
+                                    <li>Browses featured projects</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-yellow-600">"These projects look really cool! I wonder if I could make something like this."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>YouTube video</li>
+                                    <li>Website homepage</li>
+                                    <li>Featured projects</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Registration</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Creates account</li>
+                                    <li>Completes profile with interests</li>
+                                    <li>Connects with school email</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-blue-600">"I like that I can show my interests and skills in my profile."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Registration form</li>
+                                    <li>Profile setup</li>
+                                    <li>Welcome email</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Course Selection</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Browses courses by topic</li>
+                                    <li>Filters for beginner-friendly content</li>
+                                    <li>Enrolls in Arduino basics course</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-green-600">"This looks like a good place to start. I've been wanting to learn Arduino."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Course catalog</li>
+                                    <li>Filtering system</li>
+                                    <li>Course details page</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Learning</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Completes course modules</li>
+                                    <li>Watches video tutorials</li>
+                                    <li>Tries coding exercises</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-purple-600">"This is challenging but fun. I like that I can go at my own pace."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Course interface</li>
+                                    <li>Video player</li>
+                                    <li>Interactive exercises</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Forum Participation</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Asks questions when stuck</li>
+                                    <li>Participates in discussions</li>
+                                    <li>Helps other beginners</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-orange-600">"The community is supportive. I'm getting good advice from more experienced users."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Community forum</li>
+                                    <li>Q&A section</li>
+                                    <li>Discussion threads</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-r border-gray-200 font-medium">Project Creation</td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Creates first Arduino project</li>
+                                    <li>Documents process with photos</li>
+                                    <li>Writes up instructions</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-b border-r border-gray-200">
+                                <p class="text-red-600">"I'm proud of what I've made! It's not perfect, but it works, and I learned a lot."</p>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Project creation form</li>
+                                    <li>Documentation tools</li>
+                                    <li>Media upload</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-r border-gray-200 font-medium">Sharing & Feedback</td>
+                            <td class="py-2 px-4 border-r border-gray-200">
+                                <ul class="list-disc ml-4">
+                                    <li>Publishes project on platform</li>
+                                    <li>Shares with friends and teachers</li>
+                                    <li>Responds to comments and questions</li>
+                                </ul>
+                            </td>
+                            <td class="py-2 px-4 border-r border-gray-200">
+                                <p class="text-green-600">"Getting positive feedback feels great! I'm already thinking about my next project."</p>
+                            </td>
+                            <td class="py-2 px-4">
+                                <ul class="list-disc ml-4">
+                                    <li>Project showcase</li>
+                                    <li>Social sharing</li>
+                                    <li>Comments section</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Content Strategy -->
+        <section id="content-strategy" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">5. Content Strategy</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">5.1 Information Architecture</h3>
+            
+            <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                <pre class="text-sm">
+STEAM-Labz Site Structure
+|
+├── Home
+|   ├── Hero/Mission Statement
+|   ├── Featured Projects
+|   ├── Featured Courses
+|   ├── Latest Stream-Labz Videos
+|   ├── Community Highlights
+|   └── Support/Donation CTA
+|
+├── Projects
+|   ├── Featured Projects
+|   ├── Project Categories
+|   |   ├── Science
+|   |   ├── Technology
+|   |   ├── Engineering
+|   |   ├── Art
+|   |   └── Math
+|   ├── Project Search & Filters
+|   ├── Project Detail Pages
+|   └── Create Project
+|
+├── Courses
+|   ├── Featured Courses
+|   ├── Course Categories
+|   |   ├── Science
+|   |   ├── Technology
+|   |   ├── Engineering
+|   |   ├── Art
+|   |   └── Math
+|   ├── Course Search & Filters
+|   ├── Course Detail Pages
+|   └── Create Course
+|
+├── Stream-Labz
+|   ├── Featured Videos
+|   ├── Live Streams
+|   ├── Video Categories
+|   ├── Creator Spotlights
+|   ├── Video Detail Pages
+|   └── Start Streaming
+|
+├── Community
+|   ├── Discussion Categories
+|   ├── Popular Threads
+|   ├── Recent Activity
+|   ├── Forum Guidelines
+|   ├── Thread Detail Pages
+|   └── User Profiles
+|
+├── About
+|   ├── Mission & Vision
+|   ├── Team & Founder
+|   ├── Partners & Collaborators
+|   ├── Success Stories
+|   └── Contact Information
+|
+├── Support
+|   ├── Why Support STEAM-Labz
+|   ├── Donation Options
+|   ├── Sponsorship Opportunities
+|   ├── Current Funding Status
+|   └── Impact Reports
+|
+├── Documentation
+|   ├── Getting Started Guides
+|   ├── Platform Documentation
+|   ├── API References
+|   ├── Contribution Guidelines
+|   └── Tutorials
+|
+├── User Account
+|   ├── Dashboard
+|   ├── Profile
+|   ├── My Projects
+|   ├── My Courses
+|   ├── Saved Content
+|   └── Settings
+|
+└── Admin
+    ├── Dashboard
+    ├── User Management
+    ├── Content Moderation
+    ├── Analytics
+    ├── System Configuration
+    └── Funding Management
+                </pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">5.2 Content Types</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Projects</h4>
+                    <p class="mb-3">Documented DIY creations and builds from community members.</p>
+                    
+                    <h5 class="font-semibold">Components:</h5>
+                    <ul class="list-disc ml-6 mb-3">
+                        <li>Title and cover image</li>
+                        <li>Difficulty level and time estimate</li>
+                        <li>Materials list with costs</li>
+                        <li>Step-by-step instructions</li>
+                        <li>Photos and diagrams</li>
+                        <li>Code snippets (if applicable)</li>
+                        <li>Video demonstrations</li>
+                        <li>Downloadable files</li>
+                        <li>Comments and discussion</li>
+                    </ul>
+                    
+                    <h5 class="font-semibold">Metadata:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>STEAM categories</li>
+                        <li>Tags and skills</li>
+                        <li>Age/grade level</li>
+                        <li>Creator information</li>
+                        <li>Creation date</li>
+                        <li>License information</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Courses</h4>
+                    <p class="mb-3">Structured educational content with sequential learning modules.</p>
+                    
+                    <h5 class="font-semibold">Components:</h5>
+                    <ul class="list-disc ml-6 mb-3">
+                        <li>Course title and description</li>
+                        <li>Learning objectives</li>
+                        <li>Instructor information</li>
+                        <li>Module structure</li>
+                        <li>Video lessons</li>
+                        <li>Text content and examples</li>
+                        <li>Exercises and quizzes</li>
+                        <li>Downloadable resources</li>
+                        <li>Discussion forums</li>
+                    </ul>
+                    
+                    <h5 class="font-semibold">Metadata:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>STEAM categories</li>
+                        <li>Skill level (beginner to advanced)</li>
+                        <li>Estimated completion time</li>
+                        <li>Prerequisites</li>
+                        <li>Certification options</li>
+                        <li>Related courses</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Videos</h4>
+                    <p class="mb-3">Educational and instructional video content hosted on Stream-Labz.</p>
+                    
+                    <h5 class="font-semibold">Components:</h5>
+                    <ul class="list-disc ml-6 mb-3">
+                        <li>Video title and thumbnail</li>
+                        <li>Video player with Cloudflare Stream</li>
+                        <li>Video description</li>
+                        <li>Creator information</li>
+                        <li>Related resources and links</li>
+                        <li>Timestamps for key points</li>
+                        <li>Captions and transcripts</li>
+                        <li>Comments and discussion</li>
+                    </ul>
+                    
+                    <h5 class="font-semibold">Metadata:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>STEAM categories</li>
+                        <li>Video type (tutorial, lecture, demonstration)</li>
+                        <li>Duration</li>
+                        <li>Tags and topics</li>
+                        <li>Publication date</li>
+                        <li>Related videos</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Forum Posts</h4>
+                    <p class="mb-3">Community discussions, questions, and knowledge sharing.</p>
+                    
+                    <h5 class="font-semibold">Components:</h5>
+                    <ul class="list-disc ml-6 mb-3">
+                        <li>Post title and content</li>
+                        <li>Author information</li>
+                        <li>Rich text formatting</li>
+                        <li>Image and file attachments</li>
+                        <li>Code blocks with syntax highlighting</li>
+                        <li>Replies and comments</li>
+                        <li>Voting and reaction system</li>
+                        <li>Solution marking (for Q&A)</li>
+                    </ul>
+                    
+                    <h5 class="font-semibold">Metadata:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Forum category</li>
+                        <li>Tags and topics</li>
+                        <li>Creation and edit dates</li>
+                        <li>View count</li>
+                        <li>Related threads</li>
+                        <li>Status (open, solved, closed)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">5.3 Content Creation Guidelines</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Tone and Voice</h4>
+            <ul class="list-disc ml-6 mb-4">
+                <li><strong>Educational but accessible:</strong> Explain complex concepts clearly without unnecessary jargon</li>
+                <li><strong>Encouraging and supportive:</strong> Use positive language that builds confidence</li>
+                <li><strong>Inclusive:</strong> Ensure content is welcoming to all backgrounds and skill levels</li>
+                <li><strong>Enthusiastic:</strong> Convey excitement about STEAM learning and creation</li>
+                <li><strong>Professional but conversational:</strong> Balance authority with approachability</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Documentation Standards</h4>
+            <ul class="list-disc ml-6 mb-4">
+                <li><strong>Clear structure:</strong> Use consistent headings, sections, and formatting</li>
+                <li><strong>Visual support:</strong> Include images, diagrams, and videos where helpful</li>
+                <li><strong>Step-by-step instructions:</strong> Break complex processes into manageable steps</li>
+                <li><strong>Materials and prerequisites:</strong> Clearly list what's needed upfront</li>
+                <li><strong>Troubleshooting:</strong> Anticipate common issues and provide solutions</li>
+                <li><strong>Citations:</strong> Reference sources and inspirations appropriately</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Content Moderation</h4>
+            <ul class="list-disc ml-6 mb-4">
+                <li><strong>Community guidelines:</strong> Clear rules for acceptable content</li>
+                <li><strong>Review process:</strong> Initial review for new contributors</li>
+                <li><strong>Flag and report system:</strong> Community-based moderation</li>
+                <li><strong>Content rating:</strong> Age-appropriate labeling</li>
+                <li><strong>Copyright compliance:</strong> Respect for intellectual property</li>
+                <li><strong>Safety first:</strong> Warnings for potentially dangerous activities</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mb-3">5.4 Content Promotion Strategy</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Cross-Platform Promotion</h4>
+            <ul class="list-disc ml-6 mb-4">
+                <li><strong>Social media integration:</strong> Automated sharing to platform accounts</li>
+                <li><strong>Email newsletter:</strong> Regular digest of new and featured content</li>
+                <li><strong>Internal promotion:</strong> Feature system across different sections of the platform</li>
+                <li><strong>Partner networks:</strong> Cross-promotion with educational institutions and makerspaces</li>
+                <li><strong>SEO optimization:</strong> Metadata and structure for search visibility</li>
+            </ul>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Content Curation</h4>
+            <ul class="list-disc ml-6 mb-4">
+                <li><strong>Featured content:</strong> Highlighting exceptional projects and resources</li>
+                <li><strong>Themed collections:</strong> Curated content around specific topics or events</li>
+                <li><strong>Trending system:</strong> Surfacing popular and active content</li>
+                <li><strong>Staff picks:</strong> Administrator-selected noteworthy content</li>
+                <li><strong>User personalization:</strong> Recommended content based on interests and history</li>
+            </ul>
+        </section>
+        
+        <!-- Design System Specifications -->
+        <section id="design-system" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">6. Design System Specifications</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">6.1 Color Palette</h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="text-center">
+                    <div class="color-swatch bg-brand-blue"></div>
+                    <p class="font-medium">Primary Blue</p>
+                    <p class="text-sm text-gray-600">#1a5b8e</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #007d8c;"></div>
+                    <p class="font-medium">Teal Blue</p>
+                    <p class="text-sm text-gray-600">#007d8c</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #ff6b35;"></div>
+                    <p class="font-medium">Vibrant Orange</p>
+                    <p class="text-sm text-gray-600">#ff6b35</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #f9a826;"></div>
+                    <p class="font-medium">Amber</p>
+                    <p class="text-sm text-gray-600">#f9a826</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #f5f5f5;"></div>
+                    <p class="font-medium">Light Gray</p>
+                    <p class="text-sm text-gray-600">#f5f5f5</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #9e9e9e;"></div>
+                    <p class="font-medium">Medium Gray</p>
+                    <p class="text-sm text-gray-600">#9e9e9e</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #424242;"></div>
+                    <p class="font-medium">Dark Gray</p>
+                    <p class="text-sm text-gray-600">#424242</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #121212;"></div>
+                    <p class="font-medium">Near Black</p>
+                    <p class="text-sm text-gray-600">#121212</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #6a1b9a;"></div>
+                    <p class="font-medium">Science Purple</p>
+                    <p class="text-sm text-gray-600">#6a1b9a</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #1565c0;"></div>
+                    <p class="font-medium">Technology Blue</p>
+                    <p class="text-sm text-gray-600">#1565c0</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #e65100;"></div>
+                    <p class="font-medium">Engineering Orange</p>
+                    <p class="text-sm text-gray-600">#e65100</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #ad1457;"></div>
+                    <p class="font-medium">Art Pink</p>
+                    <p class="text-sm text-gray-600">#ad1457</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #2e7d32;"></div>
+                    <p class="font-medium">Math Green</p>
+                    <p class="text-sm text-gray-600">#2e7d32</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #d32f2f;"></div>
+                    <p class="font-medium">Error Red</p>
+                    <p class="text-sm text-gray-600">#d32f2f</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #388e3c;"></div>
+                    <p class="font-medium">Success Green</p>
+                    <p class="text-sm text-gray-600">#388e3c</p>
+                </div>
+                <div class="text-center">
+                    <div class="color-swatch" style="background-color: #0288d1;"></div>
+                    <p class="font-medium">Info Blue</p>
+                    <p class="text-sm text-gray-600">#0288d1</p>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Color Usage Guidelines</h4>
+            <ul class="list-disc ml-6 mb-6">
+                <li><strong>Primary Blue (#1a5b8e):</strong> Main brand color, used for headers, primary buttons, and brand elements</li>
+                <li><strong>Teal Blue (#007d8c):</strong> Secondary brand color, used for accents and secondary elements</li>
+                <li><strong>Vibrant Orange (#ff6b35):</strong> Accent color for calls-to-action, highlights, and important elements</li>
+                <li><strong>Grays:</strong> Used for text, backgrounds, and UI elements to create visual hierarchy</li>
+                <li><strong>STEAM discipline colors:</strong> Used to visually distinguish content categories</li>
+                <li><strong>Functional colors:</strong> Used consistently for error, success, warning, and information states</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mb-3">6.2 Typography</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Primary Font: Montserrat</h4>
+                    <p class="mb-3">Used for headings, navigation, and emphasis.</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-4xl font-bold" style="font-family: Montserrat, sans-serif;">Heading 1</p>
+                            <p class="text-sm text-gray-600">2.5rem (40px), Bold</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold" style="font-family: Montserrat, sans-serif;">Heading 2</p>
+                            <p class="text-sm text-gray-600">2rem (32px), Bold</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-semibold" style="font-family: Montserrat, sans-serif;">Heading 3</p>
+                            <p class="text-sm text-gray-600">1.75rem (28px), Semibold</p>
+                        </div>
+                        <div>
+                            <p class="text-xl font-semibold" style="font-family: Montserrat, sans-serif;">Heading 4</p>
+                            <p class="text-sm text-gray-600">1.5rem (24px), Semibold</p>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium" style="font-family: Montserrat, sans-serif;">Heading 5</p>
+                            <p class="text-sm text-gray-600">1.25rem (20px), Medium</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Secondary Font: Open Sans</h4>
+                    <p class="mb-3">Used for body text, paragraphs, and UI elements.</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-base" style="font-family: 'Open Sans', sans-serif;">Body Regular</p>
+                            <p class="text-sm text-gray-600">1rem (16px), Regular</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-medium" style="font-family: 'Open Sans', sans-serif;">Body Medium</p>
+                            <p class="text-sm text-gray-600">1rem (16px), Medium</p>
+                        </div>
+                        <div>
+                            <p class="text-sm" style="font-family: 'Open Sans', sans-serif;">Small Text</p>
+                            <p class="text-sm text-gray-600">0.875rem (14px), Regular</p>
+                        </div>
+                        <div>
+                            <p class="text-xs" style="font-family: 'Open Sans', sans-serif;">Extra Small / Caption</p>
+                            <p class="text-sm text-gray-600">0.75rem (12px), Regular</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Monospace Font: Roboto Mono</h4>
+                    <p class="mb-3">Used for code blocks, technical content, and tabular data.</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-base font-mono">Code Regular</p>
+                            <p class="text-sm text-gray-600">1rem (16px), Regular</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-mono">Code Small</p>
+                            <p class="text-sm text-gray-600">0.875rem (14px), Regular</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Typography Guidelines</h4>
+                    
+                    <ul class="list-disc ml-6">
+                        <li><strong>Heading hierarchy:</strong> Maintain consistent heading levels for proper document structure</li>
+                        <li><strong>Line height:</strong> 1.6 for body text, 1.2-1.4 for headings</li>
+                        <li><strong>Font weight:</strong> Use appropriate weights for emphasis (regular for body, medium/bold for headings)</li>
+                        <li><strong>Letter spacing:</strong> Slight negative tracking for headings, normal for body text</li>
+                        <li><strong>Paragraph spacing:</strong> 1.5 times the font size</li>
+                        <li><strong>Maximum line length:</strong> 70-80 characters for optimal readability</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">6.3 UI Components</h3>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Button System</h4>
+            <div class="flex flex-wrap gap-4 mb-6 items-center">
+                <button class="px-4 py-2 bg-brand-blue text-white font-medium rounded hover:bg-opacity-90 transition">Primary Button</button>
+                <button class="px-4 py-2 bg-white border border-brand-blue text-brand-blue font-medium rounded hover:bg-gray-50 transition">Secondary Button</button>
+                <button class="px-4 py-2 bg-brand-orange text-white font-medium rounded hover:bg-opacity-90 transition">Accent Button</button>
+                <button class="px-3 py-1 bg-brand-blue text-white font-medium rounded text-sm hover:bg-opacity-90 transition">Small Button</button>
+                <button class="px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded hover:bg-gray-400 transition" disabled>Disabled Button</button>
+                <button class="px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-opacity-90 transition">Danger Button</button>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Form Elements</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Text Input</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent" placeholder="Enter text here">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Select Dropdown</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent">
+                        <option>Select an option</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Checkbox</label>
+                    <div class="flex items-center">
+                        <input type="checkbox" class="h-4 w-4 text-brand-blue focus:ring-brand-blue border-gray-300 rounded">
+                        <span class="ml-2">Checkbox label</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Radio Buttons</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="radio" name="radio-group" class="h-4 w-4 text-brand-blue focus:ring-brand-blue border-gray-300">
+                            <span class="ml-2">Option 1</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" name="radio-group" class="h-4 w-4 text-brand-blue focus:ring-brand-blue border-gray-300">
+                            <span class="ml-2">Option 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Card Components</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="h-40 bg-gray-300 relative">
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-brand-blue text-white text-xs px-2 py-1 rounded">Technology</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-lg mb-2">Project Title</h3>
+                        <p class="text-gray-600 text-sm mb-4">A brief description of the project and what it entails.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span>By Username</span>
+                            </div>
+                            <button class="text-sm px-3 py-1 bg-brand-blue text-white rounded hover:bg-opacity-90 transition">View</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="h-40 bg-gray-300 relative">
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-brand-teal text-white text-xs px-2 py-1 rounded">Course</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-lg mb-2">Course Title</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn the fundamentals and advanced techniques.</p>
+                        <div class="mb-2 bg-gray-200 h-2 rounded-full">
+                            <div class="bg-brand-orange h-2 rounded-full w-3/4"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span>75% Complete</span>
+                            </div>
+                            <button class="text-sm px-3 py-1 bg-brand-blue text-white rounded hover:bg-opacity-90 transition">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="h-40 bg-gray-300 relative">
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">Live</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-lg mb-2">Video Title</h3>
+                        <p class="text-gray-600 text-sm mb-4">Watch this tutorial to learn how to create a project.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span>10:30 • 1.2K views</span>
+                            </div>
+                            <button class="text-sm px-3 py-1 bg-brand-blue text-white rounded hover:bg-opacity-90 transition">Watch</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Navigation Components</h4>
+            <div class="mb-6">
+                <div class="bg-white border border-gray-200 p-4 rounded-lg mb-4">
+                    <div class="flex justify-between items-center">
+                        <div class="font-bold text-lg text-brand-blue">STEAM-Labz</div>
+                        <div class="hidden md:flex space-x-6">
+                            <a href="#" class="text-gray-700 hover:text-brand-blue">Projects</a>
+                            <a href="#" class="text-gray-700 hover:text-brand-blue">Courses</a>
+                            <a href="#" class="text-gray-700 hover:text-brand-blue">Stream-Labz</a>
+                            <a href="#" class="text-gray-700 hover:text-brand-blue">Community</a>
+                            <a href="#" class="text-gray-700 hover:text-brand-blue">Support</a>
+                        </div>
+                        <div class="md:hidden">
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 p-4 rounded-lg mb-4">
+                    <div class="flex space-x-2 text-sm font-medium">
+                        <a href="#" class="text-gray-500">Home</a>
+                        <span class="text-gray-500">/</span>
+                        <a href="#" class="text-gray-500">Projects</a>
+                        <span class="text-gray-500">/</span>
+                        <span class="text-brand-blue">Arduino Weather Station</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 text-sm font-medium">
+                        <a href="#" class="px-4 py-3 text-brand-blue border-b-2 border-brand-blue">Overview</a>
+                        <a href="#" class="px-4 py-3 text-gray-700 hover:text-brand-blue">Instructions</a>
+                        <a href="#" class="px-4 py-3 text-gray-700 hover:text-brand-blue">Code</a>
+                        <a href="#" class="px-4 py-3 text-gray-700 hover:text-brand-blue">Discussion</a>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600">Tab content would go here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-medium text-brand-teal mb-2">Alert and Notification Components</h4>
+            <div class="space-y-4 mb-6">
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">Success Message</p>
+                            <p class="text-sm">Your project has been successfully created.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">Information Message</p>
+                            <p class="text-sm">Registration for the workshop is now open.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">Warning Message</p>
+                            <p class="text-sm">This project requires adult supervision.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">Error Message</p>
+                            <p class="text-sm">There was a problem uploading your file.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">6.4 Iconography</h3>
+            
+            <p class="mb-4">
+                The STEAM-Labz platform will use a consistent icon system to enhance usability and visual appeal. Icons will be sourced from the Font Awesome library to ensure consistency and wide coverage of needed symbols.
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-flask text-3xl text-brand-blue mb-2"></i>
+                    <p class="text-sm font-medium">Science</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-microchip text-3xl text-brand-teal mb-2"></i>
+                    <p class="text-sm font-medium">Technology</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-cogs text-3xl text-brand-orange mb-2"></i>
+                    <p class="text-sm font-medium">Engineering</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-paint-brush text-3xl text-purple-600 mb-2"></i>
+                    <p class="text-sm font-medium">Art</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-calculator text-3xl text-green-600 mb-2"></i>
+                    <p class="text-sm font-medium">Math</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-project-diagram text-3xl text-blue-600 mb-2"></i>
+                    <p class="text-sm font-medium">Projects</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-graduation-cap text-3xl text-yellow-600 mb-2"></i>
+                    <p class="text-sm font-medium">Courses</p>
+                </div>
+                <div class="text-center p-3 border border-gray-200 rounded-lg">
+                    <i class="fas fa-video text-3xl text-red-600 mb-2"></i>
+                    <p class="text-sm font-medium">Videos</p>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">6.5 Responsive Design Principles</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Mobile First</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Design for smallest screens first</li>
+                        <li>Progressive enhancement for larger screens</li>
+                        <li>Critical content prioritization</li>
+                        <li>Touch-friendly interface elements</li>
+                        <li>Simplified navigation for small screens</li>
+                        <li>Optimized performance</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Breakpoints</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Mobile: 0-767px</li>
+                        <li>Tablet: 768-1023px</li>
+                        <li>Desktop: 1024-1439px</li>
+                        <li>Large Desktop: 1440px+</li>
+                        <li>Fluid layouts within breakpoints</li>
+                        <li>Consistent component behavior across breakpoints</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Responsive Patterns</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Flexible grid system</li>
+                        <li>Column stacking on smaller screens</li>
+                        <li>Hamburger menu for mobile navigation</li>
+                        <li>Appropriate touch targets (min 44px)</li>
+                        <li>Responsive typography</li>
+                        <li>Conditional loading for performance</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">6.6 Accessibility Guidelines</h3>
+            
+            <p class="mb-4">
+                The STEAM-Labz platform is committed to meeting WCAG 2.1 AA standards and ensuring an inclusive experience for all users.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Visual Accessibility</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Color contrast ratios meeting WCAG AA standards (4.5:1 for normal text, 3:1 for large text)</li>
+                        <li>Design not relying solely on color to convey information</li>
+                        <li>Text resizing without breaking layouts (up to 200%)</li>
+                        <li>Visible focus states for keyboard navigation</li>
+                        <li>Adequate spacing between interactive elements</li>
+                        <li>Consistent design patterns throughout the platform</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Structural Accessibility</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Semantic HTML structure</li>
+                        <li>Proper heading hierarchy (H1-H6)</li>
+                        <li>Descriptive link text (avoiding "click here")</li>
+                        <li>ARIA landmarks and attributes where appropriate</li>
+                        <li>Keyboard navigability for all interactive elements</li>
+                        <li>Skip navigation links for keyboard users</li>
+                        <li>Accessible form labels and error messages</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Content Accessibility</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Alternative text for all images</li>
+                        <li>Captions and transcripts for video content</li>
+                        <li>Text alternatives for complex visualizations</li>
+                        <li>Descriptive titles for pages and documents</li>
+                        <li>Clear language and readability</li>
+                        <li>Meaningful sequence of content</li>
+                        <li>Predictable patterns of interaction</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Assistive Technology Support</h4>
+                    <ul class="list-disc ml-6">
+                        <li>Screen reader compatibility</li>
+                        <li>Support for text-to-speech software</li>
+                        <li>Voice command compatibility</li>
+                        <li>Support for browser zoom and text resizing</li>
+                        <li>Compatibility with keyboard-only navigation</li>
+                        <li>Support for high contrast mode</li>
+                        <li>Regular testing with assistive technologies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Stack -->
+        <section id="technical-stack" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">7. Technical Stack</h2>
+            <div class="section-divider"></div>
+            
+            <h3 class="text-xl font-semibold mb-3">7.1 Frontend Technologies</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Core Framework</h4>
+                    <p class="font-bold mb-2">React with Next.js</p>
+                    <p class="mb-3">A React framework for server-side rendering and static site generation.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Server-side rendering for improved SEO</li>
+                        <li>Static generation for performance</li>
+                        <li>Efficient component-based architecture</li>
+                        <li>Built-in routing and API capabilities</li>
+                        <li>Strong ecosystem and community support</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Styling</h4>
+                    <p class="font-bold mb-2">Tailwind CSS</p>
+                    <p class="mb-3">A utility-first CSS framework for rapidly building custom designs.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Highly customizable with design system integration</li>
+                        <li>Reduces need for custom CSS</li>
+                        <li>Consistent design patterns</li>
+                        <li>Built-in responsive design utilities</li>
+                        <li>Optimized production builds with PurgeCSS</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">State Management</h4>
+                    <p class="font-bold mb-2">Redux Toolkit</p>
+                    <p class="mb-3">The official, opinionated toolset for efficient Redux development.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Centralized state management</li>
+                        <li>Simplified Redux configuration</li>
+                        <li>Built-in immutability with Immer</li>
+                        <li>Integrated async handling with thunks</li>
+                        <li>DevTools for debugging</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Forms and Validation</h4>
+                    <p class="font-bold mb-2">React Hook Form with Yup</p>
+                    <p class="mb-3">Performant, flexible and extensible forms with validation.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Minimal re-renders for performance</li>
+                        <li>Uncontrolled components for better UX</li>
+                        <li>Schema-based validation with Yup</li>
+                        <li>Built-in error handling</li>
+                        <li>Lightweight bundle size</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Data Fetching</h4>
+                    <p class="font-bold mb-2">React Query</p>
+                    <p class="mb-3">Server state management library with caching, background updates, and stale data handling.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Automatic caching and refetching</li>
+                        <li>Loading and error states management</li>
+                        <li>Pagination and infinite scroll support</li>
+                        <li>Optimistic updates</li>
+                        <li>Synchronization across tabs</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">UI Components</h4>
+                    <p class="font-bold mb-2">Custom Component Library</p>
+                    <p class="mb-3">In-house component library built on top of Headless UI and Radix UI primitives.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Fully customized to match design system</li>
+                        <li>Accessibility built-in with headless primitives</li>
+                        <li>Consistent behavior across components</li>
+                        <li>Reduced bundle size with tree-shaking</li>
+                        <li>Full control over styling and functionality</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">7.2 Backend Technologies</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">API Framework</h4>
+                    <p class="font-bold mb-2">Node.js with Express</p>
+                    <p class="mb-3">JavaScript runtime with a popular web application framework.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>JavaScript across stack for developer efficiency</li>
+                        <li>Lightweight and flexible framework</li>
+                        <li>Large ecosystem of middleware</li>
+                        <li>Non-blocking I/O for performance</li>
+                        <li>Easy to find developers with relevant skills</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Authentication</h4>
+                    <p class="font-bold mb-2">Passport.js with JWT</p>
+                    <p class="mb-3">Authentication middleware for Node.js with JSON Web Tokens.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Multiple authentication strategies</li>
+                        <li>Stateless authentication with JWT</li>
+                        <li>Social login integration</li>
+                        <li>Customizable authentication flows</li>
+                        <li>Well-tested and secure</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Primary Database</h4>
+                    <p class="font-bold mb-2">MongoDB with Mongoose</p>
+                    <p class="mb-3">NoSQL document database with an elegant MongoDB object modeling for Node.js.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Flexible schema for evolving data models</li>
+                        <li>JSON-like documents match application data</li>
+                        <li>Horizontal scaling capabilities</li>
+                        <li>Mongoose for schema validation and middleware</li>
+                        <li>Strong query capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Caching</h4>
+                    <p class="font-bold mb-2">Redis</p>
+                    <p class="mb-3">In-memory data structure store for caching and message brokering.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>High-performance in-memory operations</li>
+                        <li>Versatile data structures</li>
+                        <li>Built-in expiration for cache entries</li>
+                        <li>Pub/sub capabilities for real-time features</li>
+                        <li>Session storage and rate limiting support</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Search Engine</h4>
+                    <p class="font-bold mb-2">Elasticsearch</p>
+                    <p class="mb-3">Distributed, RESTful search and analytics engine.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Full-text search capabilities</li>
+                        <li>Advanced filtering and faceting</li>
+                        <li>Multi-language support</li>
+                        <li>Scalable architecture</li>
+                        <li>Analytics and visualization capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">File Storage</h4>
+                    <p class="font-bold mb-2">MinIO (S3-compatible)</p>
+                    <p class="mb-3">High-performance, S3-compatible object storage.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Self-hosted to minimize expenses</li>
+                        <li>S3-compatible API for ecosystem compatibility</li>
+                        <li>Scalable and distributed storage</li>
+                        <li>Support for large file uploads</li>
+                        <li>Versioning and lifecycle policies</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">7.3 DevOps and Infrastructure</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Containerization</h4>
+                    <p class="font-bold mb-2">Docker</p>
+                    <p class="mb-3">Platform for developing, shipping, and running applications in containers.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Consistent environments across development and production</li>
+                        <li>Isolated services for better security</li>
+                        <li>Efficient resource utilization</li>
+                        <li>Simplified deployment and scaling</li>
+                        <li>Well-documented and widely adopted</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Container Orchestration</h4>
+                    <p class="font-bold mb-2">Kubernetes</p>
+                    <p class="mb-3">Open-source system for automating deployment, scaling, and management of containerized applications.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Automated scaling and load balancing</li>
+                        <li>Self-healing capabilities</li>
+                        <li>Service discovery and configuration management</li>
+                        <li>Rolling updates and rollbacks</li>
+                        <li>Resource management and optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">CI/CD</h4>
+                    <p class="font-bold mb-2">GitHub Actions</p>
+                    <p class="mb-3">Automation and CI/CD platform integrated with GitHub.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Tight integration with GitHub repositories</li>
+                        <li>Matrix testing across environments</li>
+                        <li>Automated testing and deployment</li>
+                        <li>Community-contributed actions</li>
+                        <li>No additional service required</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Monitoring</h4>
+                    <p class="font-bold mb-2">Prometheus and Grafana</p>
+                    <p class="mb-3">Monitoring system and time series database with visualization platform.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Real-time metrics collection and alerting</li>
+                        <li>Customizable visualization dashboards</li>
+                        <li>Powerful query language for data analysis</li>
+                        <li>Open-source with large ecosystem</li>
+                        <li>Kubernetes integration</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Logging</h4>
+                    <p class="font-bold mb-2">ELK Stack</p>
+                    <p class="mb-3">Elasticsearch, Logstash, and Kibana for log collection, storage, and visualization.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Centralized log collection and management</li>
+                        <li>Powerful search capabilities</li>
+                        <li>Real-time log processing</li>
+                        <li>Flexible visualization and dashboards</li>
+                        <li>Alerting and anomaly detection</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">CDN and Security</h4>
+                    <p class="font-bold mb-2">Cloudflare</p>
+                    <p class="mb-3">Content delivery network, DDoS protection, and security services.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Global CDN for improved performance</li>
+                        <li>DDoS protection and WAF</li>
+                        <li>SSL/TLS management</li>
+                        <li>Video streaming capabilities (Stream-Labz)</li>
+                        <li>Cloudflare for Startups program benefits</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-3">7.4 Development Tools</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Version Control</h4>
+                    <p class="font-bold mb-2">Git with GitHub</p>
+                    <p class="mb-3">Distributed version control system with web-based hosting service.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Industry standard for version control</li>
+                        <li>Collaboration features (PRs, reviews, issues)</li>
+                        <li>Integration with CI/CD (GitHub Actions)</li>
+                        <li>Project management tools</li>
+                        <li>Open source community engagement</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Code Quality</h4>
+                    <p class="font-bold mb-2">ESLint, Prettier, and TypeScript</p>
+                    <p class="mb-3">Static code analysis, code formatting, and type checking.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Enforced code standards across the team</li>
+                        <li>Early error detection</li>
+                        <li>Type safety with TypeScript</li>
+                        <li>Automated formatting for consistency</li>
+                        <li>Improved developer experience</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Testing</h4>
+                    <p class="font-bold mb-2">Jest, React Testing Library, and Cypress</p>
+                    <p class="mb-3">JavaScript testing framework, component testing utility, and end-to-end testing tool.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Comprehensive testing coverage</li>
+                        <li>Unit, integration, and end-to-end testing</li>
+                        <li>Component testing focused on user behavior</li>
+                        <li>Visual testing with Cypress</li>
+                        <li>Snapshot testing for UI components</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Documentation</h4>
+                    <p class="font-bold mb-2">Docusaurus</p>
+                    <p class="mb-3">Documentation website generator developed by Facebook.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Modern, responsive documentation site</li>
+                        <li>Markdown-based content</li>
+                        <li>Versioning capabilities</li>
+                        <li>Search functionality</li>
+                        <li>Easy deployment and maintenance</li>
+                        <li>Similar to buspirate.com style as requested</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">API Documentation</h4>
+                    <p class="font-bold mb-2">Swagger/OpenAPI</p>
+                    <p class="mb-3">API documentation and specification framework.</p>
+                    
+                    <h5 class="font-semibold">Justification:</h5>
+                    <ul class="list-disc ml-6">
+                        <li>Interactive API documentation</li>
+                        <li>Standardized API specification</li>
+                        <li>Code generation capabilities</li>
+                        <li>Testing tools integration</li>
+                        <li>Wide adoption and tooling support</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-lg font-medium text-brand-teal mb-2">Design Tools</h4>
+                    <p class="font-bold mb-2">Figma and Storybook</p>
+                    
